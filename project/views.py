@@ -2,15 +2,15 @@
 from  .models import Blog
 from .serializer import BlogSerializer
 
-#APIView
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from django.http import Http404
+# #APIView
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework import status
+# from django.http import Http404
 
-#Mixins
-from rest_framework import generics
-from rest_framework import mixins
+# #Mixins
+# from rest_framework import generics
+# from rest_framework import mixins
 
 #Generic CBV
 from rest_framework import generics
@@ -18,7 +18,16 @@ from rest_framework import generics
 #viewSet
 from rest_framework import viewsets
 
+#about athentications
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import IsOwnerOrReadOnly
+
 class BlogViewSet(viewsets.ModelViewSet):
+
+    authentication_classes=[BasicAuthentication,SessionAuthentication]
+    permission_classes=[IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
     queryset= Blog.objects.all()
     serializer_class=BlogSerializer
 
