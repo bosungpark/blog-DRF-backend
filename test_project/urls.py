@@ -20,4 +20,5 @@ from  project import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('project.urls')),
+    path('user/', include('account.urls')),
 ]
