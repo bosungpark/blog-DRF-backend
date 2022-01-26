@@ -14,12 +14,19 @@ from rest_framework import mixins
 
 #Generic CBV
 from rest_framework import generics
-    
 
-class BlogList(generics.ListCreateAPIView):
+#viewSet
+from rest_framework import viewsets
 
+class BlogViewSet(viewsets.ModelViewSet):
     queryset= Blog.objects.all()
     serializer_class=BlogSerializer
+    
+
+# class BlogList(generics.ListCreateAPIView):
+
+#     queryset= Blog.objects.all()
+#     serializer_class=BlogSerializer
 
     # # show blog list
     # def get(self,request,*args,**kwargs):
@@ -30,10 +37,10 @@ class BlogList(generics.ListCreateAPIView):
     # def post(self,request,*args,**kwargs):
     #     return self.create(request,*args,**kwargs)
 
-class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
+# class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
 
-    queryset= Blog.objects.all()
-    serializer_class=BlogSerializer
+#     queryset= Blog.objects.all()
+#     serializer_class=BlogSerializer
 
     # #show details
     # def get(self,request,*args,**kwargs):
