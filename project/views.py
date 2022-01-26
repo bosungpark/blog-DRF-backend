@@ -21,6 +21,9 @@ from rest_framework import viewsets
 class BlogViewSet(viewsets.ModelViewSet):
     queryset= Blog.objects.all()
     serializer_class=BlogSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
     
 
 # class BlogList(generics.ListCreateAPIView):
