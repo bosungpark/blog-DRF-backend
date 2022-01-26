@@ -1,6 +1,6 @@
 #데이터 처리
-from  .models import Blog
-from .serializer import BlogSerializer
+from  .models import Blog, Comment
+from .serializer import BlogSerializer, CommentSerializer
 
 # #APIView
 # from rest_framework.views import APIView
@@ -66,5 +66,13 @@ class BlogViewSet(viewsets.ModelViewSet):
     # def delete(self,request,*args,**kwargs):
     #     return self.destroy(request,*args,**kwargs)
 
-        
+class CommentViewSet(viewsets.ModelViewSet):
+    authentication_classes=[BasicAuthentication,SessionAuthentication]
+    permission_classes=[IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    queryset=Comment.objects.all()
+    serializer_class=CommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user= self.request.user)
 
